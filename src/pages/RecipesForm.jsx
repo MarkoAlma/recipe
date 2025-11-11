@@ -43,7 +43,6 @@ export const RecipesForm = () => {
     setLoading(true)
     let inputData = {name, ingredients, steps, categ}
     console.log(inputData);
-    await addRecipe(inputData, file)
     console.log("recept mentve");
 
     if (id) {
