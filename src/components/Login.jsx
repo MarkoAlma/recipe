@@ -7,18 +7,19 @@ import { MyUserContext } from '../context/MyUserProvider'
 
 const Login = () => {
 
-  const {user} = useContext(MyUserContext)
+  const {user, logoutUser} = useContext(MyUserContext)
   console.log(user);
   
   const navigate = useNavigate()
 
   return (
     <div className='header' style={{display:'flex', justifyContent:'space-between', flexDirection:'row', padding:'10px', top:'0', left:'0', position:'absolute'}}>
-        <div className='glass-btnka' onClick={()=>navigate("/")}>
+        <div className='glass-btnka haza' onClick={()=>navigate("/")}>
             <FaHome fill='black'/>
         </div>
         {user ? <div style={{display:'flex', gap:'20px'}}>
-            <Button className='glass-btnka szove'>Kijlentkezés</Button>
+            <div style={{display:'flex', alignItems:'center', justifyContent:'center', fontWeight:'bold'}}>{user.displayName}</div>
+            <Button onClick={()=>logoutUser()} className='glass-btnka szove'>Kijlentkezés</Button>
         </div> :
         <div style={{display:'flex', gap:'20px'}}>
             <Button onClick={()=>navigate("/signin")} className='glass-btnka szove' >Bejelentezés</Button>
