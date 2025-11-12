@@ -12,7 +12,7 @@ export const Home = () => {
       <div className='kisdiv'>
         <h1>RecipeBook</h1>
         <Button style={{color:'white'}} onClick={()=>navigate("/recipes")}>Főzz, posztolj, inspirálj !</Button>
-        <div style={{top:'0', right:'0', display:'flex'}}><Login/></div>
+        <Login/>
       </div>
     </div>
   )

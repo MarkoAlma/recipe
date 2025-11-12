@@ -7,12 +7,16 @@ import { useNavigate, useParams } from 'react-router';
 import { readRecipes } from '../myBackend';
 import RecipeCard from '../components/RecipeCard';
 import Login from '../components/Login';
+import { useContext } from 'react';
+import { MyUserContext } from '../context/MyUserProvider';
 
 export const Recipes = () => {
 
   const [recipes, setRecipes] = useState([])
 
 
+  const {user} = useContext(MyUserContext)
+  console.log(user);
   
 
   const navigate = useNavigate()
@@ -24,8 +28,8 @@ console.log(recipes);
 
   return (
     <div style={{minHeight:'100vh', display:'flex', justifyContent:'center' , flexDirection:'column', backgroundColor:'lightyellow', position:'relative'}}>
-      <div style={{width:'100vw'}}><Login/></div>
-      <div style={{textAlign:'center', display:'flex', justifyContent:'center', flexWrap:'wrap', gap:'10px', padding:'50px'}}> {recipes && recipes.length>0 && recipes.map(obj=> <RecipeCard key={obj.id} {...obj}/> )} {recipes && recipes.length==0 && <h4>Nincsenek receptek feltöltve</h4> }</div>
+      <Login/>
+      <div className='padd' style={{textAlign:'center', display:'flex', justifyContent:'center', flexWrap:'wrap', gap:'10px', padding:'70px'}}> {recipes && recipes.length>0 && recipes.map(obj=> <RecipeCard key={obj.id} {...obj}/> )} {recipes && recipes.length==0 && <h4>Nincsenek receptek feltöltve</h4> }</div>
       <Button onClick={()=>navigate("/addnew")} style={{position:'absolute', bottom:'5px', right:'5px', cursor:'pointer'}}>Új recept hozzáadása</Button>
     </div>
   )

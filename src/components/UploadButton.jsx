@@ -23,7 +23,7 @@ const UploadButton =({handleFileChange}) => {
       tabIndex={-1}
       startIcon={<FaCloudUploadAlt />}
     >
-      Upload files
+      Kép feltöltése
       <VisuallyHiddenInput
         type="file"
         accept='image/*'

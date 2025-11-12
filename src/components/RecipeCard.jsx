@@ -9,7 +9,7 @@ const RecipeCard = ({id, name, steps, ingredients, categ, url, delete_url}) => {
     const navigate = useNavigate()
 
   return (
-    <div style={{flexBasis:'24%', backgroundColor:'rgb(250,250,250) ', boxShadow:'1px 1px 5px 2px lightgray', borderRadius:'10px', position:'relative', padding:'10px', paddingBottom:"50px"}}>
+    <div className='kartya' style={{flexBasis:'24%', backgroundColor:'rgb(250,250,250) ', boxShadow:'1px 1px 5px 2px lightgray', borderRadius:'10px', position:'relative', padding:'10px', paddingBottom:"50px"}}>
       <h1>{name}</h1>
         <h6>({categ})</h6>
       <img src={url} alt={name} style={{width:'100px'}}/>
