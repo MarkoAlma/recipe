@@ -7,7 +7,7 @@ import { MyUserContext } from '../context/MyUserProvider'
 
 const Login = () => {
 
-  const {user, logoutUser} = useContext(MyUserContext)
+  const {user, logoutUser, setMsg} = useContext(MyUserContext)
   console.log(user);
   
   const navigate = useNavigate()
@@ -22,8 +22,8 @@ const Login = () => {
             <Button onClick={()=>logoutUser()} className='glass-btnka szove'>Kijlentkezés</Button>
         </div> :
         <div style={{display:'flex', gap:'20px'}}>
-            <Button onClick={()=>navigate("/signin")} className='glass-btnka szove' >Bejelentezés</Button>
-            <Button onClick={()=>navigate("/signup")} className='glass-btnka szove' >Regisztráció</Button>
+            <Button onClick={() => { navigate("/signin"); setMsg({});}}className='glass-btnka szove' >Bejelentezés</Button>
+            <Button onClick={() => { navigate("/signup"); setMsg({}); }} className='glass-btnka szove' >Regisztráció</Button>
         </div>}
     </div>
   )

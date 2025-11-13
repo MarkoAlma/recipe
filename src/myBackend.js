@@ -28,12 +28,13 @@ export const addRecipe = async(recipe, file)=> {
     }
 }
 
-export const readRecipes = async (setRecipes)=> {
+export const readRecipes = async (setRecipes, setLoading)=> {
     const collRef = collection(db, "recipes")
     const q = query(collRef, orderBy("timestamp", "desc"))
     const unsubscribe = onSnapshot(q,(snapshot)=> {
         //setRecipes(snapshot.docs.map(doc => doc.data()))
         setRecipes(snapshot.docs.map(doc => ({...doc.data(), id:doc.id})))
+        setLoading(false)
     })
     return unsubscribe
 }

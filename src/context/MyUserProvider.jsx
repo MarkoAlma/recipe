@@ -3,7 +3,8 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import { createContext } from 'react'
 import {auth} from '../firebaseApp'
-import { createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, signInWithEmailAndPassword, signOut, updateProfile } from 'firebase/auth'
+import { createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword, signOut, updateProfile } from 'firebase/auth'
+import { useNavigate } from 'react-router'
 
 export const MyUserContext = createContext()
 
@@ -11,16 +12,17 @@ const MyUserProvider = ({children}) => {
   const [user, setUser] = useState(null)
   const [msg, setMsg] = useState({})
 
+
   useEffect(()=>{
     const unsub = onAuthStateChanged(auth,(currentUser)=>{
-      console.log(currentUser.emailVerified);
+      //console.log(currentUser.emailVerified);
       
-      currentUser.emailVerified && setUser(currentUser)
+      currentUser?.emailVerified && setUser(currentUser)
     })
     return ()=>unsub()
   },[])
 
-  const signUpUser = async (email, password, display_name)=> {
+  const signUpUser = async (email, password, display_name, setLoading)=> {
     console.log(email, password, display_name);
     try {
       await createUserWithEmailAndPassword(auth, email, password)
@@ -30,10 +32,12 @@ const MyUserProvider = ({children}) => {
       console.log("sikeres regisztráció");
       setMsg(prev => delete prev.err)
       //setMsg({signUp:"Kattints az emailben érkezett aktiváló linkre"})
-      document.querySelector('.alma').innerHTML="Kattints az emailben érkezett aktiváló linkre"
+      setMsg({katt:"Kattints az emailben érkezett aktiváló linkre"})
     } catch (error) {
       console.log(error);
       setMsg({err:error.message})
+    }finally {
+      setLoading(false)
     }
   }
 
@@ -59,8 +63,23 @@ const MyUserProvider = ({children}) => {
     }
   }
 
+  const resetPassword = async (email)=> {
+    let success = false
+    try {
+      await sendPasswordResetEmail(auth, email)
+      setMsg({resetPw:"A jelszó visszaállításhoz szükséges email elküldve"})
+      success = true
+    } catch (error) {
+      setMsg({err:error.message})
+    }finally {
+      if (success) {
+        //navigate("/signin")
+      }
+    }
+  }
+
   return (
-    <MyUserContext.Provider value={{user, signUpUser, logoutUser, signInUser, msg}}>
+    <MyUserContext.Provider value={{user, signUpUser, logoutUser, signInUser, setMsg, msg, resetPassword}}>
       {children}
     </MyUserContext.Provider>
   )

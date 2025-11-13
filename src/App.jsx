@@ -5,6 +5,7 @@ import {Recipes} from './pages/Recipes'
 import {RecipesForm} from './pages/RecipesForm'
 import SignIn from './pages/SignIn'
 import SignUp from './pages/SignUp'
+import PwReset from './pages/PwReset'
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
         <Route path='/edit/:id' element={<RecipesForm/>}></Route>
         <Route path='/signin' element={<SignIn/>}></Route>
         <Route path='/signup' element={<SignUp/>}></Route>
+        <Route path='/pwreset' element={<PwReset/>}></Route>
       </Routes>
     </>
   )

@@ -89,7 +89,7 @@ export const RecipesForm = () => {
             </div>
           )}
           <div onClick={()=>setIngredients([...ingredients,""])} style={{cursor:'pointer', boxShadow:'1px 1px 5px 2px lightgray', borderRadius:'5px', padding:'5px', margin:'0px', height:'26px', display:'flex', alignItems:'center', justifyContent:'center'}}> <FaPlus /></div>
-          <textarea className='inputok' value={steps} onChange={(e)=>setSteps(e.target.value)} placeholder='Elkészítés lépései' required></textarea>
+          <textarea className='inputok' value={steps} onChange={(e)=>setSteps(e.target.value)} placeholder='Elkészítés lépései'  required></textarea>
           <TextField className='inputok' variant="outlined" value={categ} onChange={(e)=>setCateg(e.target.value)} placeholder='Kategória' required/>
           <div style={{ minHeight: '50px', width: '100%', display:'flex', alignItems:'center', justifyContent:'center'}}>
 
